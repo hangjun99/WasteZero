@@ -61,5 +61,9 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
-
+    implementation(libs.timber)
+    implementation(libs.lottie)
+    implementation(libs.glide)
+    implementation(libs.coil)
+    implementation(libs.coil.network.okhttp)
 }
