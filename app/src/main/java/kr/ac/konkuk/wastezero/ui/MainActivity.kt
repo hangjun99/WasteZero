@@ -2,6 +2,7 @@ package kr.ac.konkuk.wastezero.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,7 +11,7 @@ import kr.ac.konkuk.wastezero.databinding.ActivityMainBinding
 import kr.ac.konkuk.wastezero.util.base.BaseActivity
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(layoutResId = R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
