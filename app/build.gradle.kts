@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.google.services)
 }
@@ -66,4 +67,9 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.coil)
     implementation(libs.coil.network.okhttp)
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = false
 }
