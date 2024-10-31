@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.splashscreen)
+    implementation(libs.google.auth)
 }
 
 kapt {
