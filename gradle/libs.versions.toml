@@ -48,6 +48,7 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database" }
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage" }
 google-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "google-auth" }
