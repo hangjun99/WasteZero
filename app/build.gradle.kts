@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.coil)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.androidx.splashscreen)
 }
 
 kapt {
