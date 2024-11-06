@@ -23,6 +23,9 @@ import kr.ac.konkuk.wastezero.util.base.BaseActivity
 import timber.log.Timber
 
 //@AndroidEntryPoint
+class LoginActivity(
+
+) : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
