@@ -1,5 +1,5 @@
 // ProfileFragment.kt
-package kr.ac.konkuk.wastezero.ui
+package kr.ac.konkuk.wastezero.ui.profile
 
 import android.os.Bundle
 import android.view.View

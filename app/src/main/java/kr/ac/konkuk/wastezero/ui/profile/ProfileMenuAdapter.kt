@@ -1,4 +1,4 @@
-package kr.ac.konkuk.wastezero.ui
+package kr.ac.konkuk.wastezero.ui.profile
 
 import android.view.LayoutInflater
 import android.view.View
