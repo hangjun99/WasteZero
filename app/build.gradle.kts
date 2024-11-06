@@ -41,6 +41,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 }
 
@@ -60,6 +61,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.database)
     implementation(libs.firebase.storage)
     implementation(libs.timber)
@@ -68,6 +70,7 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.splashscreen)
+    implementation(libs.google.auth)
 }
 
 kapt {

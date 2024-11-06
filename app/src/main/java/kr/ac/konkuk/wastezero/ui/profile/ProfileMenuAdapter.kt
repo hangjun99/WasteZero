@@ -1,4 +1,4 @@
-package kr.ac.konkuk.wastezero.ui
+package kr.ac.konkuk.wastezero.ui.profile
 
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +32,7 @@ class ProfileMenuAdapter(
                 "보유한 식재료" -> {
                     // HoldIngredientsFragment로 전환
                     fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, HoldIngredientsFragment())
+//                        .replace(R.id.container_fl, HoldIngredientsFragment())
                         .addToBackStack(null)
                         .commit()
                 }

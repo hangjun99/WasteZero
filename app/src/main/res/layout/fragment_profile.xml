@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:padding="16dp"
-        tools:context=".ui.ProfileFragment">
+        tools:context=".ui.profile.ProfileFragment">
 
         <!-- 상단 타이틀 -->
         <TextView

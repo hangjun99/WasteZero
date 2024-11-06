@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import timber.log.Timber
 
 abstract class BaseFragment<T : ViewDataBinding>(
     @LayoutRes private val layoutResId: Int
@@ -16,6 +17,11 @@ abstract class BaseFragment<T : ViewDataBinding>(
     private var _binding: T? = null
     protected val binding: T
         get() = requireNotNull(_binding) { "${javaClass.name}'s binding is not initialized" }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,8 +33,38 @@ abstract class BaseFragment<T : ViewDataBinding>(
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 }
