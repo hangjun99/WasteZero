@@ -15,10 +15,22 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash_screen)
+        checkAuthState()
 
         // Wait until the app is ready before switching to the content
         splashScreen.setKeepOnScreenCondition { true }
         startActivity(Intent(this, MainActivity::class.java))
+    private fun checkAuthState() {
+        val auth: FirebaseAuth = Firebase.auth
+
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+        } else {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
         finish()
+
+        return
     }
+
 }
