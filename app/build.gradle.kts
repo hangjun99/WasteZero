@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.androidx.navigation.safe.args)
 }
 
 android {
@@ -71,6 +72,8 @@ dependencies {
     implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.splashscreen)
     implementation(libs.google.auth)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
 }
 
 kapt {
