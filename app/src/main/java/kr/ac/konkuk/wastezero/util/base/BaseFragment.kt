@@ -36,6 +36,12 @@ abstract class BaseFragment<T : ViewDataBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initBinding()
+    }
+
+
+    open fun initBinding() {
+
     }
 
     override fun onStart() {
