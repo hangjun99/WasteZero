@@ -12,6 +12,10 @@ class RecipeFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
 
+        val adapter = RecipeAdapter(requireContext(), result)
+        binding.recipeRv.adapter = adapter
+        binding.recipeRv.layoutManager = LinearLayoutManager(requireContext())
+
+    }
 }
