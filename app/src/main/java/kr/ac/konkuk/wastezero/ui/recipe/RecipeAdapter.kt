@@ -13,14 +13,15 @@ import kr.ac.konkuk.wastezero.databinding.ItemRecipeTitleBinding
 import kr.ac.konkuk.wastezero.databinding.ItemSearchBarBinding
 import kr.ac.konkuk.wastezero.domain.entity.Ingredient
 import kr.ac.konkuk.wastezero.domain.entity.Recipe
-import timber.log.Timber
 
 class RecipeAdapter(
     private val context: Context,
     private val items: List<ItemType>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private var itemClickListener: OnItemClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Timber.d("onCreateViewHolder")
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             VIEW_TYPE_SEARCH -> {
@@ -53,7 +54,6 @@ class RecipeAdapter(
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Timber.d("onBindViewHolder")
         when (holder) {
             is SearchViewHolder -> holder.bind()
             is TitleViewHolder -> {
@@ -74,7 +74,6 @@ class RecipeAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        Timber.d("getItemViewType")
         return when (items[position]) {
             is ItemType.SearchItem -> VIEW_TYPE_SEARCH
             is ItemType.TitleItem -> VIEW_TYPE_TITLE
@@ -83,11 +82,24 @@ class RecipeAdapter(
         }
     }
 
+    interface OnItemClickListener {
+        fun onIngredientItemClick(item: Ingredient)
+        fun onRecipeItemClick(item: Recipe)
+        fun onSearchItemClick(item: String)
+    }
+
+    fun setItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
+
     inner class SearchViewHolder(
         private val binding: ItemSearchBarBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.apply {
+                searchBarBtnLl.setOnClickListener {
+                    itemClickListener?.onSearchItemClick(searchBarWindowEt.text.toString())
+                }
             }
         }
     }
@@ -106,9 +118,16 @@ class RecipeAdapter(
         private val binding: ItemRecipeIngredientListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(ingredients: List<Ingredient>) {
+            val adapter = ExpiryIngredientAdapter(context, ingredients).apply {
+                setItemClickListener(object : ExpiryIngredientAdapter.OnItemClickListener {
+                    override fun onClick(item: Ingredient) {
+                        itemClickListener?.onIngredientItemClick(item)
+                    }
+                })
+            }
+
             binding.apply {
-                recipeExpiaryIngredientListRv.adapter =
-                    ExpiryIngredientAdapter(context, ingredients)
+                recipeExpiaryIngredientListRv.adapter = adapter
             }
         }
     }
@@ -124,6 +143,9 @@ class RecipeAdapter(
                     .apply(RequestOptions.bitmapTransform(RoundedCorners(80)))
                     .centerCrop()
                     .into(recipeItemImageIv)
+                recipeItemDetailTv.setOnClickListener {
+                    itemClickListener?.onRecipeItemClick(recipe)
+                }
             }
         }
     }
