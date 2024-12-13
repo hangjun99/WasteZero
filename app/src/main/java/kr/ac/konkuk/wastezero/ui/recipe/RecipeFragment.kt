@@ -19,7 +19,7 @@ class RecipeFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        
         val adapter = RecipeAdapter(requireContext(), result).also {
             it.setItemClickListener(object : RecipeAdapter.OnItemClickListener {
                 override fun onIngredientItemClick(item: Ingredient) {
