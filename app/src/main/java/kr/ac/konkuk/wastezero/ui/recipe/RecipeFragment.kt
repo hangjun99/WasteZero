@@ -10,7 +10,6 @@ import kr.ac.konkuk.wastezero.domain.entity.Ingredient
 import kr.ac.konkuk.wastezero.domain.entity.Recipe
 import kr.ac.konkuk.wastezero.util.base.BaseFragment
 import kr.ac.konkuk.wastezero.util.navigation.*
-import timber.log.Timber
 import java.time.LocalDate
 
 class RecipeFragment(
@@ -20,12 +19,9 @@ class RecipeFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Timber.d(parentFragmentManager.toString())
-
         val adapter = RecipeAdapter(requireContext(), result).also {
             it.setItemClickListener(object : RecipeAdapter.OnItemClickListener {
                 override fun onIngredientItemClick(item: Ingredient) {
-                    Timber.d("onIngredientItemClick")
                     setNavigation(Bundle().apply {
                         putString(BUNDLE_KEY_MAIN, BUNDLE_KEY_INGREDIENT)
                         putString(BUNDLE_KEY_INGREDIENT, item.name)
@@ -33,7 +29,6 @@ class RecipeFragment(
                 }
 
                 override fun onRecipeItemClick(item: Recipe) {
-                    Timber.d("onRecipeItemClick")
                     setNavigation(Bundle().apply {
                         putString(BUNDLE_KEY_MAIN, BUNDLE_KEY_RECIPE)
                         putString(BUNDLE_KEY_RECIPE, item.name)
@@ -41,7 +36,6 @@ class RecipeFragment(
                 }
 
                 override fun onSearchItemClick(item: String) {
-                    Timber.d("onSearchItemClick")
                     setNavigation(Bundle().apply {
                         putString(BUNDLE_KEY_MAIN, BUNDLE_KEY_SEARCH)
                         putString(BUNDLE_KEY_SEARCH, item)
