@@ -18,7 +18,7 @@ junitVersion = "1.1.5"
 
 hilt = "2.44"
 google-services = "4.4.2"
-firebase-bom = "33.4.0"
+firebase-bom = "33.7.0"
 google-auth = "21.2.0"
 
 timber = "5.0.1"
@@ -55,6 +55,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database" }
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
 google-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "google-auth" }
 
 # third-party
