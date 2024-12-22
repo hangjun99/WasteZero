@@ -18,7 +18,8 @@
             android:id="@+id/search_bar_window_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/search" />
+            android:hint="@string/search"
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
