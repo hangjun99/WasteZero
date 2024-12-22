@@ -4,4 +4,5 @@ data class Recipe(
     val id: Int,
     val name: String,
     val imageUrl: String,
+    val recipeUrl: String,
 )
