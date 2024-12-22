@@ -13,6 +13,7 @@ import kr.ac.konkuk.wastezero.databinding.ItemRecipeTitleBinding
 import kr.ac.konkuk.wastezero.databinding.ItemSearchBarBinding
 import kr.ac.konkuk.wastezero.domain.entity.Ingredient
 import kr.ac.konkuk.wastezero.domain.entity.Recipe
+import timber.log.Timber
 
 class RecipeAdapter(
     private val context: Context,
@@ -26,27 +27,27 @@ class RecipeAdapter(
         return when (viewType) {
             VIEW_TYPE_SEARCH -> {
                 val binding = ItemSearchBarBinding.inflate(inflater, parent, false)
-                return SearchViewHolder(binding)
+                SearchViewHolder(binding)
             }
 
             VIEW_TYPE_TITLE -> {
                 val binding = ItemRecipeTitleBinding.inflate(inflater, parent, false)
-                return TitleViewHolder(binding)
+                TitleViewHolder(binding)
             }
 
             VIEW_TYPE_INGREDIENT -> {
                 val binding = ItemRecipeIngredientListBinding.inflate(inflater, parent, false)
-                return IngredientViewHolder(binding)
+                IngredientViewHolder(binding)
             }
 
             VIEW_TYPE_RECIPE -> {
                 val binding = ItemRecipeBinding.inflate(inflater, parent, false)
-                return RecipeViewHolder(binding)
+                RecipeViewHolder(binding)
             }
 
             else -> {
                 val binding = ItemRecipeBinding.inflate(inflater, parent, false)
-                return RecipeViewHolder(binding)
+                RecipeViewHolder(binding)
             }
         }
     }
@@ -97,6 +98,8 @@ class RecipeAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.apply {
+//                searchBarWindowEt.
+
                 searchBarBtnLl.setOnClickListener {
                     itemClickListener?.onSearchItemClick(searchBarWindowEt.text.toString())
                 }
