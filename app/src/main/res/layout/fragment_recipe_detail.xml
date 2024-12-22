@@ -11,11 +11,10 @@
         android:layout_height="match_parent"
         tools:context=".ui.recipe.RecipeDetailFragment">
 
-        <TextView
-            android:id="@+id/name_recipe_detail_tv"
+        <WebView
+            android:id="@+id/recipe_detail_wv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/recipe_name" />
+            android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
