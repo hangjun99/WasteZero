@@ -38,6 +38,10 @@
         <action
             android:id="@+id/action_searchFragment_to_recipeDetailFragment"
             app:destination="@id/recipeDetailFragment" />
+        <argument
+            android:name="ingredientName"
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -62,7 +66,11 @@
         android:id="@+id/recipeDetailFragment"
         android:name="kr.ac.konkuk.wastezero.ui.recipe.RecipeDetailFragment"
         android:label="RecipeDetailFragment"
-        tools:layout="@layout/fragment_recipe_detail" />
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeUrl"
+            app:argType="string" />
+    </fragment>
 
     <include app:graph="@navigation/login_graph" />
 
