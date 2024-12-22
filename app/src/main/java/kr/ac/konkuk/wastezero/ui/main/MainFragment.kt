@@ -2,7 +2,6 @@ package kr.ac.konkuk.wastezero.ui.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kr.ac.konkuk.wastezero.R
@@ -47,9 +46,20 @@ class MainFragment(
         ) { _, bundle ->
             Timber.d("setFragmentResultListener")
             when (bundle.getString(BUNDLE_KEY_MAIN)) {
-                BUNDLE_KEY_SEARCH -> controller.navigate(R.id.action_mainFragment_to_searchFragment)
+                BUNDLE_KEY_SEARCH -> {
+                    val action = MainFragmentDirections.actionMainFragmentToSearchFragment(
+                        ingredientName = bundle.getString(BUNDLE_KEY_SEARCH)!!
+                    )
+                    controller.navigate(action)
+                }
 
-                BUNDLE_KEY_RECIPE -> controller.navigate(R.id.action_mainFragment_to_recipeDetailFragment)
+                BUNDLE_KEY_RECIPE -> {
+                    val data = bundle.getString(BUNDLE_KEY_RECIPE)
+                    val action = MainFragmentDirections.actionMainFragmentToRecipeDetailFragment(
+                        recipeUrl = bundle.getString(BUNDLE_KEY_RECIPE)!!
+                    )
+                    controller.navigate(action)
+                }
 
                 BUNDLE_KEY_INGREDIENT -> {
                     // TODO: 식재료 상세 창으로
