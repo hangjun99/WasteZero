@@ -18,6 +18,10 @@ abstract class BaseActivity<T : ViewDataBinding>(
         binding = DataBindingUtil.setContentView(this, layoutResId)
         binding.lifecycleOwner = this
 
+        initBinding()
+    }
+
+    open fun initBinding() {
 
     }
 

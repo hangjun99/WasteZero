@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.androidx.navigation.safe.args)
 }
 
 android {
@@ -52,6 +53,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.places)
+    implementation(libs.androidx.core.i18n)
+//    implementation(libs.litert)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,6 +75,13 @@ dependencies {
     implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.splashscreen)
     implementation(libs.google.auth)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
+    implementation(libs.firebase.firestore)
+    implementation(libs.camera.view)
+    implementation(libs.camera.lifecycle)
+    implementation (libs.tensorflow.lite)
+    implementation (libs.tensorflow.lite.support)
 }
 
 kapt {

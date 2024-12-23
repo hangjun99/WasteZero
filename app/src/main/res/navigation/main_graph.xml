@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="kr.ac.konkuk.wastezero.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_alarmFragment"
+            app:destination="@id/alarmFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ingredientListFragment"
+            app:destination="@id/ingredientListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_login_graph"
+            app:destination="@id/login_graph" />
+        <action
+            android:id="@+id/action_mainFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="kr.ac.konkuk.wastezero.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment" />
+        <argument
+            android:name="ingredientName"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/alarmFragment"
+        android:name="kr.ac.konkuk.wastezero.ui.alarm.AlarmFragment"
+        android:label="AlarmFragment"
+        tools:layout="@layout/fragment_alarm" />
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="kr.ac.konkuk.wastezero.ui.camera.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/fragment_camera" />
+
+    <fragment
+        android:id="@+id/ingredientListFragment"
+        android:name="kr.ac.konkuk.wastezero.ui.ingredient.IngredientListFragment"
+        android:label="IngredientListFragment"
+        tools:layout="@layout/fragment_ingredient_list" />
+
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="kr.ac.konkuk.wastezero.ui.recipe.RecipeDetailFragment"
+        android:label="RecipeDetailFragment"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeUrl"
+            app:argType="string" />
+    </fragment>
+
+    <include app:graph="@navigation/login_graph" />
+
+</navigation>

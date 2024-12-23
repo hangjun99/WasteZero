@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="#FFFFFF">
+
+        <!-- 재료 이미지 (선택사항, 불필요하면 제거 가능) -->
+        <ImageView
+            android:id="@+id/ingredient_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Ingredient Image"/>
+
+        <!-- 재료 이름 입력 필드 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="재료 이름"
+            android:textSize="16sp"
+            android:textColor="#FF000000"
+            android:paddingStart="8dp"
+            android:paddingBottom="4dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/ingredient_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="재료 이름 입력"
+            android:fontFamily="@font/wastezero_inter_regular"
+            android:textSize="16sp"
+            android:textColor="#FF000000"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:drawableEnd="@drawable/ic_dropdown"/>
+
+        <!-- 구매일자 필드 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="구매일자"
+            android:textSize="16sp"
+            android:textColor="#FF000000"
+            android:paddingStart="8dp"
+            android:paddingBottom="4dp" />
+
+        <EditText
+            android:id="@+id/purchase_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="구매일자"
+            android:textColor="#FF000000"
+            android:focusable="false"
+            android:clickable="true"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 남은 유통기한 필드 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="남은 유통기한"
+            android:textSize="16sp"
+            android:textColor="#FF000000"
+            android:paddingStart="8dp"
+            android:paddingBottom="4dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/expiration_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="10일"
+            android:textColor="#FF000000"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_dropdown"/>
+
+        <!-- RecyclerView 추가 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <!-- 사용유무 체크박스 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/textview_used"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사용유무"
+                android:fontFamily="@font/wastezero_inter_bold"
+                android:textColor="#FF000000"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:paddingEnd="8dp" />
+
+            <CheckBox
+                android:id="@+id/checkbox_used"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 완료 버튼 -->
+        <Button
+            android:id="@+id/savebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="완료"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF50"
+            android:layout_marginTop="16dp"
+            android:paddingVertical="12dp" />
+
+    </LinearLayout>
+</ScrollView>

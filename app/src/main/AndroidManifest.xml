@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission
         android:name="android.permission.READ_MEDIA_IMAGES"
         android:minSdkVersion="33" />
@@ -27,9 +28,6 @@
         android:theme="@style/Theme.WasteZero"
         tools:targetApi="31">
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.WasteZero.SplashScreen">
@@ -44,6 +42,40 @@
             android:exported="true">
 
         </activity>
+
+        <activity
+            android:name=".ui.camera.CameraActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.ingredient.IngredientListActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.ingredient.InputIngredientsActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.ingredient.HoldIngredientsActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".ui.ingredient.UsedIngredientsActivity"
+            android:exported="true">
+
+        </activity>
+
+        <receiver
+            android:name=".receiver.IngredientAlarmReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

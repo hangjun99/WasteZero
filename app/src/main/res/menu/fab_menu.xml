@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_camera_input"
+        android:icon="@drawable/ic_photo"
+        android:title="카메라로 입력" />
+    <item
+        android:id="@+id/menu_direct_input"
+        android:icon="@drawable/ic_edit"
+        android:title="직접 입력" />
+</menu>
