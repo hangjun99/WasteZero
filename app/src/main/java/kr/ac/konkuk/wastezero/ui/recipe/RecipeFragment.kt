@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+//import com.google.firebase.firestore.ktx.firestore
+//import com.google.firebase.ktx.Firebase
 import kr.ac.konkuk.wastezero.R
 import kr.ac.konkuk.wastezero.databinding.FragmentRecipeBinding
 import kr.ac.konkuk.wastezero.domain.entity.Ingredient
@@ -21,7 +21,7 @@ class RecipeFragment(
 
 ) : BaseFragment<FragmentRecipeBinding>(R.layout.fragment_recipe) {
 
-    private val firebaseFirestore = Firebase.firestore
+//    private val firebaseFirestore = Firebase.firestore
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
