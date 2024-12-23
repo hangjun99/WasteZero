@@ -131,7 +131,7 @@ class RecipeFragment(
 
         val example1 = RecipeAdapter.ItemType.SearchItem
         val example2 = RecipeAdapter.ItemType.TitleItem("보관기간이 임박한 식재료")
-        val exampel3 = RecipeAdapter.ItemType.IngredientItem(ingredient)
+        val exampel3 = RecipeAdapter.ItemType.IngredientItem(listOf<Ingredient>())//ingredient)
         val example4 = RecipeAdapter.ItemType.TitleItem("레시피")
 
     }

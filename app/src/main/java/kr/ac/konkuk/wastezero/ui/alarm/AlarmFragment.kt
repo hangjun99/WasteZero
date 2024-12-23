@@ -8,6 +8,7 @@ import kr.ac.konkuk.wastezero.databinding.FragmentAlarmBinding
 import kr.ac.konkuk.wastezero.domain.entity.Alarm
 import kr.ac.konkuk.wastezero.util.base.BaseFragment
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class AlarmFragment(
 
@@ -29,13 +30,31 @@ class AlarmFragment(
         val example = listOf(
             AlarmAdapter.ItemType.TitleItem,
             AlarmAdapter.ItemType.AlarmItem(
-                Alarm(1, "식재료 유통기한 알림", LocalDateTime.now(), false),
+                Alarm(
+                    1, "식재료 유통기한 알림", LocalDateTime.parse(
+                        "2024-12-23 09:00", DateTimeFormatter.ofPattern(
+                            kr.ac.konkuk.wastezero.util.date.dateTimeFormatter
+                        )
+                    ), false
+                ),
             ),
             AlarmAdapter.ItemType.AlarmItem(
-                Alarm(1, "식재료 유통기한 알림", LocalDateTime.now(), false),
+                Alarm(
+                    1, "식재료 유통기한 알림", LocalDateTime.parse(
+                        "2024-12-22 09:00", DateTimeFormatter.ofPattern(
+                            kr.ac.konkuk.wastezero.util.date.dateTimeFormatter
+                        )
+                    ), false
+                ),
             ),
             AlarmAdapter.ItemType.AlarmItem(
-                Alarm(1, "식재료 유통기한 알림", LocalDateTime.now(), false),
+                Alarm(
+                    1, "식재료 유통기한 알림", LocalDateTime.parse(
+                        "2024-12-21 09:00", DateTimeFormatter.ofPattern(
+                            kr.ac.konkuk.wastezero.util.date.dateTimeFormatter
+                        )
+                    ), false
+                ),
             ),
 
             )
