@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.MainFragment">
@@ -27,20 +28,26 @@
             android:id="@+id/main_bnv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:backgroundTint="#ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:itemIconTint="@drawable/menu_selector_color"
             app:menu="@menu/bn_menu" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/main_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/unselected_ic_add"
+            android:src="@drawable/addbutton"
+            app:fabCustomSize="56dp"
+            app:backgroundTint="#22A45D"
+            app:borderWidth="0dp"
             app:layout_constraintBottom_toTopOf="@id/main_bnv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/main_bnv" />
+            app:layout_constraintTop_toTopOf="@id/main_bnv"
+            app:tint="@null" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

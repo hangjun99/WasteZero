@@ -5,13 +5,22 @@ import java.time.LocalDate
 import java.time.temporal.ChronoField
 import java.time.temporal.ChronoUnit
 
+/*data class Ingredient(
+    var id: String? = null,
+    val name: String = "",
+    val purchaseDate: String = "",
+    val expiryDays: Int = 0,
+    var isUsed: Boolean = false, // 체크 상태 추가
+    val imageUrl : String
+)*/
+
 data class Ingredient(
     val id: Int,
     val name: String,
     val imageUrl: String,
     val buyingDate: LocalDate,
     val expiryDate: LocalDate,
-    val isUsed: Boolean,
+    val used: Boolean = false,
 ) {
     fun calculateRestDate(): Int {
         val currentDay = LocalDate.now()
@@ -23,4 +32,6 @@ data class Ingredient(
         val currentDate = LocalDate.now()
         return currentDate.isAfter(expiryDate)
     }
+
+    constructor() : this(0, "", "", LocalDate.now(), LocalDate.now(), false)
 }

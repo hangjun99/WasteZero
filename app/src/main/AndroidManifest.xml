@@ -41,6 +41,26 @@
             android:exported="true">
 
         </activity>
+        <activity android:name=".ui.camera.CameraActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".ui.ingredient.IngredientListActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".ui.ingredient.InputIngredientsActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".ui.ingredient.HoldIngredientsActivity"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".ui.ingredient.UsedIngredientsActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

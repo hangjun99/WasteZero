@@ -16,12 +16,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     private var _binding: T? = null
     protected val binding: T
-        get() = requireNotNull(_binding) { "${javaClass.name}'s binding is not initialized" }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+        get() = requireNotNull(_binding) { "${javaClass.simpleName}'s binding is not initialized" }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,42 +30,20 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        initBinding()
+        // Binding이 초기화된 후 작업을 수행
+        if (_binding != null) {
+            initBinding()
+        } else {
+            Timber.e("${javaClass.simpleName}: Binding is null in onViewCreated")
+        }
     }
-
 
     open fun initBinding() {
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-
+        // 자식 클래스에서 필요한 초기화 작업 수행
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
     }
 }
