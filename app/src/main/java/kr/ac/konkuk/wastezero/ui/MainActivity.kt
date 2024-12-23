@@ -1,6 +1,11 @@
 package kr.ac.konkuk.wastezero.ui
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
@@ -41,6 +46,7 @@ class MainActivity(
         }*/
 
         Timber.d("onCreate")
+        checkPermission()
         checkLoginState(Firebase.auth.currentUser != null)
     }
 
@@ -67,6 +73,42 @@ class MainActivity(
 
     }
 
+    private fun checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permissionCheck = ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.POST_NOTIFICATIONS
+            )
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                    PERMISSION_REQUEST_CODE
+                )
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(applicationContext, "Permission is denied", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(applicationContext, "Permission is granted", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+
     private fun checkLoginState(isLogin: Boolean) {
         if (!isLogin) {
             getNavigationController().navigate(R.id.action_mainFragment_to_login_graph)
@@ -91,4 +133,8 @@ class MainActivity(
 
         transaction.commit()
     }*/
+
+    companion object {
+        private const val PERMISSION_REQUEST_CODE = 100
+    }
 }

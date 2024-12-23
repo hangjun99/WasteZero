@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import dagger.hilt.android.HiltAndroidApp
 import kr.ac.konkuk.wastezero.BuildConfig
+import kr.ac.konkuk.wastezero.util.notification.Notification
 import timber.log.Timber
 
 @HiltAndroidApp
@@ -13,6 +14,7 @@ class Application : Application() {
         super.onCreate()
         disableDarkMode()
         initTimber()
+        Notification.createNotificationChannel(this)
     }
 
     private fun initTimber() {
