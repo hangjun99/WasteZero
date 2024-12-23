@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.0-alpha08"
+agp = "8.7.3"
 
 kotlin = "1.9.24"
 ksp = "1.9.24-1.0.20"
@@ -31,8 +31,8 @@ cameraLifecycle = "1.4.0"
 cameraView = "1.4.0"
 tensorflowLite = "2.13.0"
 tensorflowLiteSupport = "0.4.0"
-retrofit ="2.9.0"
-playServicesFido ="20.0.1"
+retrofit = "2.9.0"
+playServicesFido = "20.0.1"
 cameraViewVersion = "1.4.1"
 cameraLifecycleVersion = "1.4.1"
 places = "4.1.0"
