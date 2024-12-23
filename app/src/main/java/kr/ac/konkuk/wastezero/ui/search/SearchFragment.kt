@@ -27,11 +27,49 @@ class SearchFragment(
     private fun getRecipeList(term: String): List<RecipeAdapter.ItemType> {
         val title = RecipeAdapter.ItemType.TitleItem("\"$term\"를 포함한 레시피")
         // TODO : DB에서 term을 포함한 레시피 리스트를 가져오는 코드 작성
-        val recipes = RecipeDetail.potatoList.map {
-            RecipeAdapter.ItemType.RecipeItem(
-                Recipe(it.id, it.name, it.imageUrl, it.recipeUrl)
-            )
+        val recipes = mutableListOf<RecipeAdapter.ItemType.RecipeItem>()
+        when (term) {
+            "감자" -> {
+                RecipeDetail.potatoList.map {
+                    recipes.add(
+                        RecipeAdapter.ItemType.RecipeItem(
+                            Recipe(it.id, it.name, it.imageUrl, it.recipeUrl)
+                        )
+                    )
+                }
+            }
+
+            "두부" -> {
+                RecipeDetail.tofuList.map {
+                    recipes.add(
+                        RecipeAdapter.ItemType.RecipeItem(
+                            Recipe(it.id, it.name, it.imageUrl, it.recipeUrl)
+                        )
+                    )
+                }
+            }
+
+            "돼지고기" -> {
+                RecipeDetail.porkList.map {
+                    recipes.add(
+                        RecipeAdapter.ItemType.RecipeItem(
+                            Recipe(it.id, it.name, it.imageUrl, it.recipeUrl)
+                        )
+                    )
+                }
+            }
+
+            "돼지" -> {
+                RecipeDetail.porkList.map {
+                    recipes.add(
+                        RecipeAdapter.ItemType.RecipeItem(
+                            Recipe(it.id, it.name, it.imageUrl, it.recipeUrl)
+                        )
+                    )
+                }
+            }
         }
+
         return listOf(title) + recipes
     }
 

@@ -109,5 +109,41 @@ data class RecipeDetail(
             ),
         )
 
+        val tofuList: List<RecipeDetail> = listOf(
+            RecipeDetail(
+                1,
+                "두부김치 황금레시피~!! 고기없어도 괜찮아요~",
+                "https://recipe1.ezmember.co.kr/cache/recipe/2017/07/10/06822a9fe6e7213aeb0e3fb0ff19ee3c1.jpg",
+                "https://m.10000recipe.com/recipe/6872475"
+            ),
+            RecipeDetail(
+                2,
+                "두부조림 만들기",
+                "https://recipe1.ezmember.co.kr/cache/recipe/2015/08/05/4cce84e6f70767fb22e8ea35b772dd781.jpg",
+                "https://m.10000recipe.com/recipe/4588059"
+            ),
+        )
+
+        val porkList: List<RecipeDetail> = listOf(
+            RecipeDetail(
+                1,
+                "매콤달콤 고추장 돼지불고기",
+                "https://recipe1.ezmember.co.kr/cache/recipe/2017/05/06/9948fba54b6c6b619f97b61a2ba61d461.jpg",
+                "https://m.10000recipe.com/recipe/6869806",
+            ),
+            RecipeDetail(
+                2,
+                "돼지고기 김치찌개 맛내는 비법",
+                "https://recipe1.ezmember.co.kr/cache/recipe/2015/08/25/a01d013a6b6f9d526c43f4659db2cd61.jpg",
+                "https://m.10000recipe.com/recipe/1785098"
+            ),
+            RecipeDetail(
+                3,
+                "돼지고기 장조림 만들기 국물까지 맛있어요",
+                "https://recipe1.ezmember.co.kr/cache/recipe/2017/09/16/adbf9a20616e14cdb1c16c9891b2b84b1.jpg",
+                "https://m.10000recipe.com/recipe/6876570"
+            ),
+        )
+
     }
 }
