@@ -24,10 +24,6 @@ class MainFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fab: FloatingActionButton = binding.mainFab
-        fab.setOnClickListener {
-            toggleFabMenu(fab)
-        }
         setNavigation()
     }
 
@@ -36,6 +32,7 @@ class MainFragment(
 
         binding.apply {
             mainBnv.setupWithNavController(getBottomNavController())
+            mainFabIv.setOnClickListener { toggleFabMenu(mainFab) }
         }
 
     }
