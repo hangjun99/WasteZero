@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.ac.konkuk.wastezero.databinding.ActivityIngredientListBinding
+import kr.ac.konkuk.wastezero.ui.IngredientListAdapter
 
 class IngredientListActivity : AppCompatActivity() {
 
