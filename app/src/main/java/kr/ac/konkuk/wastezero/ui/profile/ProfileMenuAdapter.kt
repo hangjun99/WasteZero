@@ -23,6 +23,16 @@ class ProfileMenuAdapter(
     private val menuList: List<String>
 ) : RecyclerView.Adapter<ProfileMenuAdapter.MenuViewHolder>() {
 
+    private var onItemClickListener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onAlarmItemClick()
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
     inner class MenuViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewMenuTitle: TextView = view.findViewById(R.id.textViewMenuTitle)
     }
@@ -42,13 +52,18 @@ class ProfileMenuAdapter(
                     val intent = Intent(context, HoldIngredientsActivity::class.java)
                     context.startActivity(intent)
                 }
+
                 "사용한 식재료" -> {
                     val intent = Intent(context, UsedIngredientsActivity::class.java)
                     context.startActivity(intent)
                 }
+
                 "닉네임 변경" -> showNicknameChangeDialog()
                 "로그아웃" -> logoutUser(holder.itemView)
                 "회원탈퇴" -> deleteUserAccount(holder.itemView)
+                "알림 변경" -> {
+                    onItemClickListener?.onAlarmItemClick()
+                }
             }
         }
     }
@@ -69,13 +84,25 @@ class ProfileMenuAdapter(
                 if (userId != null) {
                     val userRef = FirebaseDatabase.getInstance().getReference("users").child(userId)
                     userRef.child("nickname").setValue(newNickname).addOnSuccessListener {
-                        android.widget.Toast.makeText(context, "닉네임이 변경되었습니다.", android.widget.Toast.LENGTH_SHORT).show()
+                        android.widget.Toast.makeText(
+                            context,
+                            "닉네임이 변경되었습니다.",
+                            android.widget.Toast.LENGTH_SHORT
+                        ).show()
                     }.addOnFailureListener {
-                        android.widget.Toast.makeText(context, "닉네임 변경 실패", android.widget.Toast.LENGTH_SHORT).show()
+                        android.widget.Toast.makeText(
+                            context,
+                            "닉네임 변경 실패",
+                            android.widget.Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             } else {
-                android.widget.Toast.makeText(context, "닉네임을 입력해주세요.", android.widget.Toast.LENGTH_SHORT).show()
+                android.widget.Toast.makeText(
+                    context,
+                    "닉네임을 입력해주세요.",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -98,7 +125,8 @@ class ProfileMenuAdapter(
 
         // Google 로그인 세션 초기화
         googleSignInClient.signOut().addOnCompleteListener {
-            android.widget.Toast.makeText(context, "로그아웃 되었습니다.", android.widget.Toast.LENGTH_SHORT).show()
+            android.widget.Toast.makeText(context, "로그아웃 되었습니다.", android.widget.Toast.LENGTH_SHORT)
+                .show()
 
             // MainActivity로 이동
             val intent = Intent(context, MainActivity::class.java).apply {
@@ -134,22 +162,37 @@ class ProfileMenuAdapter(
                         .addOnSuccessListener {
                             // Google 세션 초기화
                             googleSignInClient.signOut().addOnCompleteListener { signOutTask ->
-                                googleSignInClient.revokeAccess().addOnCompleteListener { revokeTask ->
-                                    android.widget.Toast.makeText(context, "회원탈퇴가 완료되었습니다.", android.widget.Toast.LENGTH_SHORT).show()
+                                googleSignInClient.revokeAccess()
+                                    .addOnCompleteListener { revokeTask ->
+                                        android.widget.Toast.makeText(
+                                            context,
+                                            "회원탈퇴가 완료되었습니다.",
+                                            android.widget.Toast.LENGTH_SHORT
+                                        ).show()
 
-                                    // 로그인 화면으로 이동
-                                    val intent = Intent(context, MainActivity::class.java).apply {
-                                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                        // 로그인 화면으로 이동
+                                        val intent =
+                                            Intent(context, MainActivity::class.java).apply {
+                                                flags =
+                                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            }
+                                        context.startActivity(intent)
                                     }
-                                    context.startActivity(intent)
-                                }
                             }
                         }
                         .addOnFailureListener { authError ->
-                            android.widget.Toast.makeText(context, "회원탈퇴 중 오류가 발생했습니다: ${authError.message}", android.widget.Toast.LENGTH_SHORT).show()
+                            android.widget.Toast.makeText(
+                                context,
+                                "회원탈퇴 중 오류가 발생했습니다: ${authError.message}",
+                                android.widget.Toast.LENGTH_SHORT
+                            ).show()
                         }
                 }.addOnFailureListener { dbError ->
-                    android.widget.Toast.makeText(context, "데이터 삭제 실패: ${dbError.message}", android.widget.Toast.LENGTH_SHORT).show()
+                    android.widget.Toast.makeText(
+                        context,
+                        "데이터 삭제 실패: ${dbError.message}",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
             builder.setNegativeButton("취소", null)

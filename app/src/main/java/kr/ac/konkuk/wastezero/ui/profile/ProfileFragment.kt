@@ -2,6 +2,7 @@ package kr.ac.konkuk.wastezero.ui.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -9,6 +10,10 @@ import com.google.firebase.database.FirebaseDatabase
 import kr.ac.konkuk.wastezero.R
 import kr.ac.konkuk.wastezero.databinding.FragmentProfileBinding
 import kr.ac.konkuk.wastezero.util.base.BaseFragment
+import kr.ac.konkuk.wastezero.util.navigation.BUNDLE_KEY_ALARM
+import kr.ac.konkuk.wastezero.util.navigation.BUNDLE_KEY_INGREDIENT
+import kr.ac.konkuk.wastezero.util.navigation.BUNDLE_KEY_MAIN
+import kr.ac.konkuk.wastezero.util.navigation.REQUEST_KEY_MAIN
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
@@ -18,7 +23,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         // RecyclerView 메뉴 설정
         val menuList = listOf("보유한 식재료", "사용한 식재료", "알림 변경", "닉네임 변경", "로그아웃", "회원탈퇴")
         binding.recyclerViewMenu.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewMenu.adapter = ProfileMenuAdapter(requireContext(), menuList)
+        binding.recyclerViewMenu.adapter = ProfileMenuAdapter(requireContext(), menuList).apply {
+            setOnItemClickListener(object : ProfileMenuAdapter.OnItemClickListener {
+                override fun onAlarmItemClick() {
+                    // 알림 변경
+                    setNavigation(Bundle().apply {
+                        putString(BUNDLE_KEY_MAIN, BUNDLE_KEY_ALARM)
+                    })
+                }
+            })
+        }
 
         // Firebase 사용자 정보로 프로필 UI 업데이트
         updateProfileUI()
@@ -50,6 +64,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
                 .into(binding.profileCircle)
         }
     }
+
+    private fun setNavigation(data: Bundle) = setFragmentResult(REQUEST_KEY_MAIN, data)
 
     override fun onDestroyView() {
         super.onDestroyView()

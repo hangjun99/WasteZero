@@ -116,6 +116,12 @@ class MainFragment(
                     val action = MainFragmentDirections.actionMainFragmentToAlarmFragment()
                     controller.navigate(action)
                 }
+
+                BUNDLE_KEY_ALARM -> {
+                    // TODO : 알림 설정 화면으로 이동
+                    val action = MainFragmentDirections.actionMainFragmentToAlarmFragment()
+                    controller.navigate(action)
+                }
             }
         }
     }
