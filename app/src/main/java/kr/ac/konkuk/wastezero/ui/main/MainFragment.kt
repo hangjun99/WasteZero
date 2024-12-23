@@ -25,7 +25,6 @@ class MainFragment(
 
         binding.apply {
             mainBnv.setupWithNavController(getBottomNavController())
-
         }
 
     }
@@ -54,7 +53,6 @@ class MainFragment(
                 }
 
                 BUNDLE_KEY_RECIPE -> {
-                    val data = bundle.getString(BUNDLE_KEY_RECIPE)
                     val action = MainFragmentDirections.actionMainFragmentToRecipeDetailFragment(
                         recipeUrl = bundle.getString(BUNDLE_KEY_RECIPE)!!
                     )
@@ -62,10 +60,17 @@ class MainFragment(
                 }
 
                 BUNDLE_KEY_INGREDIENT -> {
-                    // TODO: 식재료 상세 창으로
+                    // TODO : 재료 상세 화면으로 이동
+                    val action = MainFragmentDirections.actionMainFragmentToAlarmFragment()
+                    controller.navigate(action)
                 }
             }
         }
+    }
+
+    companion object {
+        const val NOTIFICATION_REQUEST_KEY_MAIN = "REQUEST_KEY_MAIN"
+        const val NOTIFICATION_REQUEST_CODE_MAIN = "REQUEST_CODE_MAIN"
     }
 
 }
