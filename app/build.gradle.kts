@@ -55,7 +55,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.places)
     implementation(libs.androidx.core.i18n)
-    implementation(libs.litert)
+//    implementation(libs.litert)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
