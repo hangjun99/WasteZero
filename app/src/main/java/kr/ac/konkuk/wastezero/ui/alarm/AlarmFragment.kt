@@ -25,4 +25,20 @@ class AlarmFragment(
         binding.alarmRv.layoutManager = LinearLayoutManager(context)
     }
 
+    companion object {
+        val example = listOf(
+            AlarmAdapter.ItemType.TitleItem,
+            AlarmAdapter.ItemType.AlarmItem(
+                Alarm(1, "식재료 유통기한 알림", LocalDateTime.now(), false),
+            ),
+            AlarmAdapter.ItemType.AlarmItem(
+                Alarm(1, "식재료 유통기한 알림", LocalDateTime.now(), false),
+            ),
+            AlarmAdapter.ItemType.AlarmItem(
+                Alarm(1, "식재료 유통기한 알림", LocalDateTime.now(), false),
+            ),
+
+            )
+    }
+
 }
