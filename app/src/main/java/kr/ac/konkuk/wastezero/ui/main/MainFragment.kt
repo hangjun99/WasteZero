@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.ac.konkuk.wastezero.R
 import kr.ac.konkuk.wastezero.databinding.FragmentMainBinding
 import kr.ac.konkuk.wastezero.ui.camera.CameraActivity
