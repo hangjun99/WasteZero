@@ -2,7 +2,11 @@ package kr.ac.konkuk.wastezero.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -31,50 +35,63 @@ class MainFragment(
 
         binding.apply {
             mainBnv.setupWithNavController(getBottomNavController())
-            mainFabIv.setOnClickListener { toggleFabMenu(mainFab) }
+            mainFabIv.setOnClickListener { toggleFabMenu() }
         }
 
     }
 
-    private fun toggleFabMenu(fab: FloatingActionButton) {
+    private fun toggleFabMenu() {
         if (isFabOpen) {
-            fab.setImageResource(R.drawable.addbutton) // + 이미지
+            binding.mainFabIv.setImageResource(R.drawable.ic_add_btn) // + 버튼 이미지
+            binding.mainFab.visibility = View.INVISIBLE
         } else {
-            fab.setImageResource(R.drawable.xbutton) // - 이미지
-            showPopupMenu(fab)
+            binding.mainFabIv.setImageResource(R.drawable.ic_x_btn) // X 버튼 이미지
+            binding.mainFab.visibility = View.VISIBLE
+            showCustomPopupMenu(binding.mainFabIv)
         }
         isFabOpen = !isFabOpen
     }
 
-    private fun showPopupMenu(view: View) {
-        val popupMenu = PopupMenu(requireContext(), view)
-        popupMenu.menuInflater.inflate(R.menu.fab_menu, popupMenu.menu)
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.menu_camera_input -> {
-                    /*findNavController().navigate(R.id.action_mainFragment_to_cameraFragment)
-                    true*/
-                    val intent = Intent(requireContext(), CameraActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
+    private fun showCustomPopupMenu(anchorView: View) {
+        // 팝업 메뉴 레이아웃을 인플레이트
+        val popupView = LayoutInflater.from(requireContext()).inflate(R.layout.popup_menu, null)
 
-                R.id.menu_direct_input -> {
-                    val intent = Intent(requireContext(), InputIngredientsActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
+        // 팝업 창 생성
+        val popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
 
-                else -> false
-            }
+        val dimBackground = requireActivity().window.attributes
+        dimBackground.alpha = 0.5f // 흐림 정도 (0.0: 투명, 1.0: 불투명)
+        requireActivity().window.addFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        requireActivity().window.attributes = dimBackground
+
+        // 버튼 클릭 동작 설정
+        popupView.findViewById<LinearLayout>(R.id.camera_input).setOnClickListener {
+            val intent = Intent(requireContext(), CameraActivity::class.java)
+            startActivity(intent)
+            popupWindow.dismiss()
         }
 
-        popupMenu.setOnDismissListener {
+        popupView.findViewById<LinearLayout>(R.id.manual_input).setOnClickListener {
+            val intent = Intent(requireContext(), InputIngredientsActivity::class.java)
+            startActivity(intent)
+            popupWindow.dismiss()
+        }
+
+        popupWindow.setOnDismissListener {
             isFabOpen = false
-            val fab = binding.mainFab
-            fab.setImageResource(R.drawable.addbutton) // + 이미지로 초기화
+            binding.mainFabIv.setImageResource(R.drawable.ic_add_btn)
+            binding.mainFab.visibility = View.INVISIBLE
+            dimBackground.alpha = 1.0f
+            requireActivity().window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            requireActivity().window.attributes = dimBackground
         }
-        popupMenu.show()
+
+        popupWindow.showAsDropDown(anchorView, 50, -650) // 위치 조정
     }
 
     private fun getBottomNavController() =
