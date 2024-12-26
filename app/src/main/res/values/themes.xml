@@ -3,7 +3,39 @@
     <style name="Base.Theme.WasteZero" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/primary_normal</item>
     </style>
 
     <style name="Theme.WasteZero" parent="Base.Theme.WasteZero" />
+
+    <style name="Theme.WasteZero.SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:statusBarColor">@color/primary_normal</item>
+        <item name="android:navigationBarColor">@color/primary_normal</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="windowSplashScreenBackground">@color/primary_normal</item>
+        <item name="postSplashScreenTheme">@style/Theme.WasteZero</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <item name="boxStrokeColor">@color/selector_textfield</item>
+        <item name="boxStrokeWidth">1dp</item>
+
+        <item name="boxCornerRadiusTopStart">100dp</item>
+        <item name="boxCornerRadiusTopEnd">100dp</item>
+        <item name="boxCornerRadiusBottomStart">100dp</item>
+        <item name="boxCornerRadiusBottomEnd">100dp</item>
+
+        <!--// error
+        <item name="errorEnabled">true</item>
+        // 에러 사용할지 안할지 설정
+        <item name="colorError">@color/red</item>
+        // 에러 text 색상
+        <item name="errorIconDrawable">@null</item>
+        // 에러 이미지
+        <item name="errorTextAppearance">@style/....</item>
+        // 에러 폰트 스타일-->
+
+    </style>
+
 </resources>

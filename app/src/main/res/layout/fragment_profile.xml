@@ -1,0 +1,72 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!-- 데이터 바인딩을 위한 변수를 정의할 수 있습니다 -->
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:padding="16dp"
+        tools:context=".ui.profile.ProfileFragment">
+
+        <TextView
+            android:id="@+id/profile_title"
+            android:layout_width="89dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="24dp"
+            android:text="프로필"
+            android:textColor="#FF3D3D3D"
+            android:textSize="32sp"
+            android:lineSpacingExtra="9.6sp"
+            android:fontFamily="@font/wastezero_inter_bold"
+            android:gravity="start"
+            android:alpha="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- 프로필 이미지 (Circle) -->
+        <ImageView
+            android:id="@+id/profile_circle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="24dp"
+            android:background="@drawable/profile_circle_background"
+            app:layout_constraintTop_toBottomOf="@id/profile_title"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- 닉네임 -->
+        <TextView
+            android:id="@+id/profile_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="152dp"
+            android:text="닉네임"
+            android:textColor="#FF3D3D3D"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4.8sp"
+            android:fontFamily="@font/wastezero_inter_semibold"
+            android:gravity="start"
+            android:alpha="1"
+            app:layout_constraintTop_toTopOf="@id/profile_circle"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- 메뉴 RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMenu"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@id/profile_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
