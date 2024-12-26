@@ -1,0 +1,8 @@
+<resources>
+    <!-- FAB 원형 스타일 -->
+    <style name="ShapeAppearance.FloatingActionButton.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item> <!-- 원형으로 설정 -->
+        <item name="fabCustomSize">40dp</item> <!-- FAB 크기를 49dp로 설정 -->
+    </style>
+</resources>

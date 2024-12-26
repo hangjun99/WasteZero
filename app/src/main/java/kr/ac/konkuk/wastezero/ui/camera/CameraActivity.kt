@@ -1,12 +1,16 @@
 package kr.ac.konkuk.wastezero.ui.camera
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kr.ac.konkuk.wastezero.databinding.ActivityCameraBinding
 import kr.ac.konkuk.wastezero.ui.ingredient.IngredientListActivity
 import org.tensorflow.lite.Interpreter
@@ -65,16 +69,37 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Load the TensorFlow Lite model
+        // 권한 확인 및 요청
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestCameraPermission()
+        } else {
+            initializeCamera()
+        }
+    }
+
+    private fun requestCameraPermission() {
+        cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+    }
+
+    private val cameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            initializeCamera()
+        } else {
+            Toast.makeText(this, "카메라 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
+
+    private fun initializeCamera() {
         try {
             tflite = Interpreter(loadModelFile("best-fp16-1.tflite"))
+            launchCamera()
         } catch (e: Exception) {
             Toast.makeText(this, "TensorFlow Lite 모델 로드 실패: ${e.message}", Toast.LENGTH_SHORT).show()
             finish()
         }
-
-        // Launch camera
-        launchCamera()
     }
 
     private fun launchCamera() {
@@ -99,12 +124,8 @@ class CameraActivity : AppCompatActivity() {
     private fun processImage(bitmap: Bitmap): List<String> {
         val inputBuffer = preprocessImage(bitmap)
         val outputBuffer = Array(1) { Array(10647) { FloatArray(35) } }
-
-        debugInputBuffer(inputBuffer)
-
         tflite.run(inputBuffer, outputBuffer)
         val results = postProcess(outputBuffer[0])
-
         return results.map { labelTranslations[it] ?: it }
     }
 
@@ -125,24 +146,22 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun postProcess(output: Array<FloatArray>): List<String> {
-        val detectedMap = mutableMapOf<String, Float>() // 이름과 신뢰도 저장
+        val detectedMap = mutableMapOf<String, Float>()
         for (box in output) {
-            val confidence = box[4] // 탐지 신뢰도
-            if (confidence > 0.7f) { // 최소 신뢰도 필터
+            val confidence = box[4]
+            if (confidence > 0.7f) {
                 val scores = box.slice(5 until box.size)
                 val maxScoreIndex = scores.indices.maxByOrNull { scores[it] } ?: -1
                 if (maxScoreIndex in labels.indices) {
                     val label = labels[maxScoreIndex]
                     val translatedLabel = labelTranslations[label] ?: label
-
-                    // 기존 이름의 신뢰도보다 높으면 업데이트
                     if (detectedMap[translatedLabel] == null || detectedMap[translatedLabel]!! < confidence) {
                         detectedMap[translatedLabel] = confidence
                     }
                 }
             }
         }
-        return detectedMap.keys.toList() // 중복 제거된 이름만 반환
+        return detectedMap.keys.toList()
     }
 
     private fun navigateToIngredientList(ingredients: List<String>) {
@@ -160,20 +179,6 @@ class CameraActivity : AppCompatActivity() {
         val startOffset = fileDescriptor.startOffset
         val declaredLength = fileDescriptor.declaredLength
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
-    }
-
-    private fun debugInputBuffer(buffer: ByteBuffer) {
-        buffer.rewind() // 버퍼의 읽기 위치를 초기화
-        val floatArray = FloatArray(buffer.capacity() / 4) // Float당 4바이트
-        buffer.asFloatBuffer().get(floatArray)
-
-        // 로그 출력 (필요한 범위만 출력하거나 제한)
-        for (i in floatArray.indices) {
-            if (i < 100) { // 너무 많은 로그 방지
-                println("Input Buffer Value [$i]: ${floatArray[i]}")
-            }
-        }
-        buffer.rewind() // 버퍼를 다시 원래 위치로 돌려서 모델 실행에 영향을 주지 않음
     }
 
     companion object {

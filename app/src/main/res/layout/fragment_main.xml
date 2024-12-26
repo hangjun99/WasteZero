@@ -53,11 +53,14 @@
             android:elevation="11dp"
             android:src="@drawable/ic_add_btn"
             android:visibility="invisible"
+            app:fabSize="mini"
+            app:elevation="0dp"
             app:borderWidth="0dp"
             app:layout_constraintBottom_toTopOf="@id/main_bnv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/main_bnv"
+            style="@style/ShapeAppearance.FloatingActionButton.Circle"
             app:tint="@null" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
